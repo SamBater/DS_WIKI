@@ -24,5 +24,22 @@ While in stance, use normal attack for a low spinning slash, or strong attack to
     <p>The Wolf Knight's Greatsword is a strong quality greatsword with a versatile moveset. It possesses a wide array of swings that make it adept at fighting crowds and lone foes alike, and has a thrust attack that gives it good reach when wielded in one hand. As well, its skill gives it additional tools to use against enemies, from a crowd-clearing spin slash to a powerful leaping smash. However, it is also the heaviest greatsword in the game, and its overall scaling tends to fall off in the long run.
 
 As implied by its description, the Wolf Knight's Greatsword deals increased damage against foes that originate from the Abyss, such as Darkwraiths.</p>
+
+    <h2>Comments</h2>
+    <hr>
+
+    <div class="comment_panel">
+  <label>头像</label>
+  <label>用户名</label>
+  <label> ` 时间</label>
+  <p> 这是一条评论</p>
+  <hr>
+
+    </div>
+  
+
+                                    <input id="add_comment" style="width:50%;height:100px;margin:10px;text-align:left" placeholder="在此处添加评论"/>
+            <br />
+            <button style="text-align:end" >确定</button>
 </asp:Content>
 

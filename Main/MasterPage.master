@@ -87,6 +87,12 @@ div{
   color: white;
 }
 
+.input{
+    margin:10px;
+    border:solid 2px black;
+    padding:5px;
+}
+
 div.transparent
 {
   background: #111111;
@@ -151,6 +157,13 @@ div.transparent image{
   background: gray;
 }
 
+.gv{
+    margin:10px;
+    padding:5px;
+    padding-left : 10px;
+    padding-right:10px;
+}
+
 
 </style>
     <asp:ContentPlaceHolder id="head" runat="server">
@@ -159,10 +172,10 @@ div.transparent image{
 <body>
     <form id="form1" runat="server">
           <div class="header">
-      <label>登录</label>
-      <label>修改密码</label>
-      <label>系统管理</label>
-      <label>退出</label>
+              <asp:label runat="server" ID="welcom"></asp:label>
+      <asp:button ID="change_passwd" runat="server" Text="修改密码" OnClick="change_passwd_Click"></asp:button>
+      <asp:button ID="system_manager" runat="server" Text="系统管理" OnClick="system_manager_Click"></asp:button>
+      <asp:button ID="exit" CausesValidation="false" runat="server" Text="退出" OnClick="exit_Click"></asp:button>
   </div>
 
   <div class="icon">
@@ -180,27 +193,11 @@ div.transparent image{
 
     <article>
                 <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+
         </asp:ContentPlaceHolder>
     </article>
 
-    <h2>Comments</h2>
-    <hr>
-                                    <input id="add_comment" style="width:50%;height:100px;margin:10px;text-align:left" placeholder="在此处添加评论"/>
-            <br />
-            <button style="text-align:end" >确定</button>
-    <div class="comment_panel">
-  <label>头像</label>
-  <label>用户名</label>
-  <label> ` 时间</label>
-  <p> 这是一条评论</p>
-  <hr>
-
-    </div>
-  
-
-
-  </div>
-
+            </div>
   <div class="footer">
     者TM是脚注
       </div>

@@ -150,7 +150,7 @@ public partial class Table : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passwd", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passwd", DbType="NChar(10)")]
 	public string passwd
 	{
 		get

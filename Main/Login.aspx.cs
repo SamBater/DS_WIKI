@@ -32,7 +32,6 @@ public partial class _Default : System.Web.UI.Page
         else if(IsValid)
         {
             db.InsertTable(user_textbox.Text, passwd_textbox.Text,name_textbox.Text);
-            //TODO:注册成功后,直接跳转到主页
             Response.Write("<script>alert('注册成功.');</script>");
             register_pannel.Visible = false;
             log_in_pannel.Visible = true;
@@ -45,9 +44,10 @@ public partial class _Default : System.Web.UI.Page
     {
         if (db.CheckLogin(login_user.Text,login_passwd.Text))
         {
-            Session["Name"] = login_user.Text;
-            if (login_user.Text.Equals("Sam")) Session["Admin"] = true;
-            //TODO 切换到真主页.
+            //Session["User"] = login_user.Text;
+            Table t  = db.GetUser(login_user.Text);
+            Session["User"] = t;
+            if (t.Id < 20) Session["Admin"] = true;
             Response.Redirect("./Home.aspx");
         }
         else
