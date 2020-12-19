@@ -28,18 +28,8 @@ As implied by its description, the Wolf Knight's Greatsword deals increased dama
     <h2>Comments</h2>
     <hr>
 
-    <div class="comment_panel">
-  <label>头像</label>
-  <label>用户名</label>
-  <label> ` 时间</label>
-  <p> 这是一条评论</p>
-  <hr>
 
-    </div>
   
 
-                                    <input id="add_comment" style="width:50%;height:100px;margin:10px;text-align:left" placeholder="在此处添加评论"/>
-            <br />
-            <button style="text-align:end" >确定</button>
 </asp:Content>
 

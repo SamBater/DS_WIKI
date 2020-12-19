@@ -19,5 +19,32 @@
 黑魂3目前正在编写武器的小知识界面
 如果有兴趣长期在黑魂维基编辑，可以加入交流群</li>
     </ul>
+        <h2>评论</h2><hr />
+
+     <asp:LinqDataSource ID="ldsUser" EnableDelete="true"   EnableUpdate="true" runat="server" ContextTypeName="DataClassesDataContext" TableName="Comment" >
+        
+    </asp:LinqDataSource>
+    <asp:ScriptManager ID="script_manager" runat="server"></asp:ScriptManager>
+ <asp:TextBox runat="server" Cssclass="comment_panel" id="comment_input" style="width:60%;height:100px;margin:10px;text-align:left" placeholder="在此处添加评论"/>
+            <br />
+            <asp:button runat="server" ID="add_comment_btn" OnClick="add_comment_btn_Click"  style="text-align:end;margin-left:10px;" Text="发布评论"></asp:button>
+    <asp:UpdatePanel ID="update_panel"  runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+    <asp:Repeater ID="comment_repeater"  runat="server">
+        <ItemTemplate>
+            <div class="comment_panel">
+                <image class="headIcon" src="../Images/icon.jpg"></image>
+                <span style="position:center"> <%# Eval("user") %> <a><%# Eval("time") %></a> 
+                    <%# Eval("text") %>
+                </span>
+            </div>
+        </ItemTemplate>
+    </asp:Repeater>
+            <asp:Button ID="refresh"  runat="server"/>
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="add_comment_btn" EventName="Click" />
+        </Triggers>
+    </asp:UpdatePanel>
 </asp:Content>
 

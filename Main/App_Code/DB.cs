@@ -59,6 +59,18 @@ public class DB
 
     }
 
+    public Object GetAllComment()
+    {
+        var result =from r in db.Comment orderby r.time descending select r;
+        return result;
+    }
+
+    public void InsertComment(Comment comment)
+    {
+        db.Comment.InsertOnSubmit(comment);
+        db.SubmitChanges();
+    }
+
     public Table GetUser(string user)
     {
         var result = from r in db.Table where r.user.Equals(user) select r;
