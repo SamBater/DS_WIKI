@@ -12,6 +12,16 @@ body, html {
   margin: 0;
 }
 
+.center{
+    text-align:center;
+    display:inline-block;
+}
+
+.title{
+    font-weight:bold;
+    font-size:30px;
+}
+
 html { 
   background: url("https://img.yxbao.com/patch/image/202009/23/8220b86342.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;

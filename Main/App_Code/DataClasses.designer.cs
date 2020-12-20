@@ -35,6 +35,12 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
   partial void InsertComment(Comment instance);
   partial void UpdateComment(Comment instance);
   partial void DeleteComment(Comment instance);
+  partial void InsertMagic(Magic instance);
+  partial void UpdateMagic(Magic instance);
+  partial void DeleteMagic(Magic instance);
+  partial void InsertWeapon(Weapon instance);
+  partial void UpdateWeapon(Weapon instance);
+  partial void DeleteWeapon(Weapon instance);
   #endregion
 	
 	public DataClassesDataContext() : 
@@ -80,6 +86,22 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<Comment>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Magic> Magic
+	{
+		get
+		{
+			return this.GetTable<Magic>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Weapon> Weapon
+	{
+		get
+		{
+			return this.GetTable<Weapon>();
 		}
 	}
 }
@@ -351,6 +373,370 @@ public partial class Comment : INotifyPropertyChanging, INotifyPropertyChanged
 				this._time = value;
 				this.SendPropertyChanged("time");
 				this.OntimeChanged();
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Magic")]
+public partial class Magic : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _Id;
+	
+	private string _name;
+	
+	private string _effect;
+	
+	private System.Nullable<int> _cost;
+	
+	private string _slot;
+	
+	private string _availability;
+	
+	private string _description;
+	
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OneffectChanging(string value);
+    partial void OneffectChanged();
+    partial void OncostChanging(System.Nullable<int> value);
+    partial void OncostChanged();
+    partial void OnslotChanging(string value);
+    partial void OnslotChanged();
+    partial void OnavailabilityChanging(string value);
+    partial void OnavailabilityChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    #endregion
+	
+	public Magic()
+	{
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int Id
+	{
+		get
+		{
+			return this._Id;
+		}
+		set
+		{
+			if ((this._Id != value))
+			{
+				this.OnIdChanging(value);
+				this.SendPropertyChanging();
+				this._Id = value;
+				this.SendPropertyChanged("Id");
+				this.OnIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(40)")]
+	public string name
+	{
+		get
+		{
+			return this._name;
+		}
+		set
+		{
+			if ((this._name != value))
+			{
+				this.OnnameChanging(value);
+				this.SendPropertyChanging();
+				this._name = value;
+				this.SendPropertyChanged("name");
+				this.OnnameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_effect", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+	public string effect
+	{
+		get
+		{
+			return this._effect;
+		}
+		set
+		{
+			if ((this._effect != value))
+			{
+				this.OneffectChanging(value);
+				this.SendPropertyChanging();
+				this._effect = value;
+				this.SendPropertyChanged("effect");
+				this.OneffectChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cost", DbType="Int")]
+	public System.Nullable<int> cost
+	{
+		get
+		{
+			return this._cost;
+		}
+		set
+		{
+			if ((this._cost != value))
+			{
+				this.OncostChanging(value);
+				this.SendPropertyChanging();
+				this._cost = value;
+				this.SendPropertyChanged("cost");
+				this.OncostChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_slot", DbType="NChar(10)")]
+	public string slot
+	{
+		get
+		{
+			return this._slot;
+		}
+		set
+		{
+			if ((this._slot != value))
+			{
+				this.OnslotChanging(value);
+				this.SendPropertyChanging();
+				this._slot = value;
+				this.SendPropertyChanged("slot");
+				this.OnslotChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_availability", DbType="NChar(200)")]
+	public string availability
+	{
+		get
+		{
+			return this._availability;
+		}
+		set
+		{
+			if ((this._availability != value))
+			{
+				this.OnavailabilityChanging(value);
+				this.SendPropertyChanging();
+				this._availability = value;
+				this.SendPropertyChanged("availability");
+				this.OnavailabilityChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+	public string description
+	{
+		get
+		{
+			return this._description;
+		}
+		set
+		{
+			if ((this._description != value))
+			{
+				this.OndescriptionChanging(value);
+				this.SendPropertyChanging();
+				this._description = value;
+				this.SendPropertyChanged("description");
+				this.OndescriptionChanged();
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Weapon")]
+public partial class Weapon : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _Id;
+	
+	private string _name;
+	
+	private string _description;
+	
+	private string _availability;
+	
+	private string _characteristics;
+	
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    partial void OnavailabilityChanging(string value);
+    partial void OnavailabilityChanged();
+    partial void OncharacteristicsChanging(string value);
+    partial void OncharacteristicsChanged();
+    #endregion
+	
+	public Weapon()
+	{
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int Id
+	{
+		get
+		{
+			return this._Id;
+		}
+		set
+		{
+			if ((this._Id != value))
+			{
+				this.OnIdChanging(value);
+				this.SendPropertyChanging();
+				this._Id = value;
+				this.SendPropertyChanged("Id");
+				this.OnIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(40)")]
+	public string name
+	{
+		get
+		{
+			return this._name;
+		}
+		set
+		{
+			if ((this._name != value))
+			{
+				this.OnnameChanging(value);
+				this.SendPropertyChanging();
+				this._name = value;
+				this.SendPropertyChanged("name");
+				this.OnnameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+	public string description
+	{
+		get
+		{
+			return this._description;
+		}
+		set
+		{
+			if ((this._description != value))
+			{
+				this.OndescriptionChanging(value);
+				this.SendPropertyChanging();
+				this._description = value;
+				this.SendPropertyChanged("description");
+				this.OndescriptionChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_availability", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+	public string availability
+	{
+		get
+		{
+			return this._availability;
+		}
+		set
+		{
+			if ((this._availability != value))
+			{
+				this.OnavailabilityChanging(value);
+				this.SendPropertyChanging();
+				this._availability = value;
+				this.SendPropertyChanged("availability");
+				this.OnavailabilityChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_characteristics", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+	public string characteristics
+	{
+		get
+		{
+			return this._characteristics;
+		}
+		set
+		{
+			if ((this._characteristics != value))
+			{
+				this.OncharacteristicsChanging(value);
+				this.SendPropertyChanging();
+				this._characteristics = value;
+				this.SendPropertyChanged("characteristics");
+				this.OncharacteristicsChanged();
 			}
 		}
 	}

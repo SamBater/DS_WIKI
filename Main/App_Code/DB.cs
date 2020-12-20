@@ -89,4 +89,16 @@ public class DB
             }
         }
     }
+
+    public Magic GetMagic(int id)
+    {
+        var result = from r in db.Magic where r.Id == id select r;
+        return result.FirstOrDefault();
+    }
+
+    public Object GetMagicObject(int id)
+    {
+        var result = from r in db.Magic where r.Id == id select r;
+        return result;
+    }
 }
