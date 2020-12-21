@@ -1,6 +1,8 @@
 ﻿body, html {
     height: 100%;
     margin: 0;
+    background-image: url(../Images/fire.gif);
+    background-size:cover;
 }
 
 .bg {
@@ -29,6 +31,7 @@
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+
 }
 
 .button {
@@ -42,4 +45,8 @@
     text-decoration: none;
     display: inline-block;
     font-size: 14px;
+}
+
+#form1{
+    background:white;
 }

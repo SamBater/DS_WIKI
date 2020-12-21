@@ -32,15 +32,15 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
   partial void InsertTable(Table instance);
   partial void UpdateTable(Table instance);
   partial void DeleteTable(Table instance);
-  partial void InsertComment(Comment instance);
-  partial void UpdateComment(Comment instance);
-  partial void DeleteComment(Comment instance);
   partial void InsertMagic(Magic instance);
   partial void UpdateMagic(Magic instance);
   partial void DeleteMagic(Magic instance);
   partial void InsertWeapon(Weapon instance);
   partial void UpdateWeapon(Weapon instance);
   partial void DeleteWeapon(Weapon instance);
+  partial void InsertComment(Comment instance);
+  partial void UpdateComment(Comment instance);
+  partial void DeleteComment(Comment instance);
   #endregion
 	
 	public DataClassesDataContext() : 
@@ -81,14 +81,6 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
 		}
 	}
 	
-	public System.Data.Linq.Table<Comment> Comment
-	{
-		get
-		{
-			return this.GetTable<Comment>();
-		}
-	}
-	
 	public System.Data.Linq.Table<Magic> Magic
 	{
 		get
@@ -102,6 +94,14 @@ public partial class DataClassesDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<Weapon>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Comment> Comment
+	{
+		get
+		{
+			return this.GetTable<Comment>();
 		}
 	}
 }
@@ -122,6 +122,8 @@ public partial class Table : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private string _icon;
 	
+	private EntitySet<Comment> _Comment;
+	
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -140,6 +142,7 @@ public partial class Table : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	public Table()
 	{
+		this._Comment = new EntitySet<Comment>(new Action<Comment>(this.attach_Comment), new Action<Comment>(this.detach_Comment));
 		OnCreated();
 	}
 	
@@ -243,137 +246,16 @@ public partial class Table : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Comment")]
-public partial class Comment : INotifyPropertyChanging, INotifyPropertyChanged
-{
-	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private int _Id;
-	
-	private string _text;
-	
-	private string _user;
-	
-	private System.Nullable<System.DateTime> _time;
-	
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OntextChanging(string value);
-    partial void OntextChanged();
-    partial void OnuserChanging(string value);
-    partial void OnuserChanged();
-    partial void OntimeChanging(System.Nullable<System.DateTime> value);
-    partial void OntimeChanged();
-    #endregion
-	
-	public Comment()
-	{
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int Id
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Table_Comment", Storage="_Comment", ThisKey="Id", OtherKey="uid")]
+	public EntitySet<Comment> Comment
 	{
 		get
 		{
-			return this._Id;
+			return this._Comment;
 		}
 		set
 		{
-			if ((this._Id != value))
-			{
-				this.OnIdChanging(value);
-				this.SendPropertyChanging();
-				this._Id = value;
-				this.SendPropertyChanged("Id");
-				this.OnIdChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_text", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-	public string text
-	{
-		get
-		{
-			return this._text;
-		}
-		set
-		{
-			if ((this._text != value))
-			{
-				this.OntextChanging(value);
-				this.SendPropertyChanging();
-				this._text = value;
-				this.SendPropertyChanged("text");
-				this.OntextChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[user]", Storage="_user", DbType="NChar(50)")]
-	public string user
-	{
-		get
-		{
-			return this._user;
-		}
-		set
-		{
-			if ((this._user != value))
-			{
-				this.OnuserChanging(value);
-				this.SendPropertyChanging();
-				this._user = value;
-				this.SendPropertyChanged("user");
-				this.OnuserChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time", DbType="DateTime")]
-	public System.Nullable<System.DateTime> time
-	{
-		get
-		{
-			return this._time;
-		}
-		set
-		{
-			if ((this._time != value))
-			{
-				this.OntimeChanging(value);
-				this.SendPropertyChanging();
-				this._time = value;
-				this.SendPropertyChanged("time");
-				this.OntimeChanged();
-			}
+			this._Comment.Assign(value);
 		}
 	}
 	
@@ -395,6 +277,18 @@ public partial class Comment : INotifyPropertyChanging, INotifyPropertyChanged
 		{
 			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
+	}
+	
+	private void attach_Comment(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Table = this;
+	}
+	
+	private void detach_Comment(Comment entity)
+	{
+		this.SendPropertyChanging();
+		entity.Table = null;
 	}
 }
 
@@ -737,6 +631,181 @@ public partial class Weapon : INotifyPropertyChanging, INotifyPropertyChanged
 				this._characteristics = value;
 				this.SendPropertyChanged("characteristics");
 				this.OncharacteristicsChanged();
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Comment")]
+public partial class Comment : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _Id;
+	
+	private string _text;
+	
+	private System.Nullable<System.DateTime> _time;
+	
+	private System.Nullable<int> _uid;
+	
+	private EntityRef<Table> _Table;
+	
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OntextChanging(string value);
+    partial void OntextChanged();
+    partial void OntimeChanging(System.Nullable<System.DateTime> value);
+    partial void OntimeChanged();
+    partial void OnuidChanging(System.Nullable<int> value);
+    partial void OnuidChanged();
+    #endregion
+	
+	public Comment()
+	{
+		this._Table = default(EntityRef<Table>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int Id
+	{
+		get
+		{
+			return this._Id;
+		}
+		set
+		{
+			if ((this._Id != value))
+			{
+				this.OnIdChanging(value);
+				this.SendPropertyChanging();
+				this._Id = value;
+				this.SendPropertyChanged("Id");
+				this.OnIdChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_text", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+	public string text
+	{
+		get
+		{
+			return this._text;
+		}
+		set
+		{
+			if ((this._text != value))
+			{
+				this.OntextChanging(value);
+				this.SendPropertyChanging();
+				this._text = value;
+				this.SendPropertyChanged("text");
+				this.OntextChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time", DbType="DateTime")]
+	public System.Nullable<System.DateTime> time
+	{
+		get
+		{
+			return this._time;
+		}
+		set
+		{
+			if ((this._time != value))
+			{
+				this.OntimeChanging(value);
+				this.SendPropertyChanging();
+				this._time = value;
+				this.SendPropertyChanged("time");
+				this.OntimeChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_uid", DbType="Int")]
+	public System.Nullable<int> uid
+	{
+		get
+		{
+			return this._uid;
+		}
+		set
+		{
+			if ((this._uid != value))
+			{
+				if (this._Table.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.OnuidChanging(value);
+				this.SendPropertyChanging();
+				this._uid = value;
+				this.SendPropertyChanged("uid");
+				this.OnuidChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Table_Comment", Storage="_Table", ThisKey="uid", OtherKey="Id", IsForeignKey=true, DeleteRule="CASCADE")]
+	public Table Table
+	{
+		get
+		{
+			return this._Table.Entity;
+		}
+		set
+		{
+			Table previousValue = this._Table.Entity;
+			if (((previousValue != value) 
+						|| (this._Table.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Table.Entity = null;
+					previousValue.Comment.Remove(this);
+				}
+				this._Table.Entity = value;
+				if ((value != null))
+				{
+					value.Comment.Add(this);
+					this._uid = value.Id;
+				}
+				else
+				{
+					this._uid = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("Table");
 			}
 		}
 	}

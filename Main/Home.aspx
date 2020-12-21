@@ -24,19 +24,19 @@
      <asp:LinqDataSource ID="ldsUser" EnableDelete="true"   EnableUpdate="true" runat="server" ContextTypeName="DataClassesDataContext" TableName="Comment" >
         
     </asp:LinqDataSource>
-    <asp:ScriptManager ID="script_manager" runat="server"></asp:ScriptManager>
- <asp:TextBox runat="server" Cssclass="comment_panel" id="comment_input" style="width:60%;height:100px;margin:10px;text-align:left" placeholder="在此处添加评论"/>
+ <asp:TextBox runat="server" TextMode="MultiLine" Cssclass="comment_panel" id="comment_input" style="width:60%;height:100px;margin:10px;text-align:left" placeholder="在此处添加评论"/>
             <br />
             <asp:button runat="server" ID="add_comment_btn" OnClick="add_comment_btn_Click"  style="text-align:end;margin-left:10px;" Text="发布评论"></asp:button>
-    <asp:UpdatePanel ID="update_panel"  runat="server" UpdateMode="Conditional">
+    <asp:UpdatePanel ID="update_panel"  runat="server">
         <ContentTemplate>
     <asp:Repeater ID="comment_repeater"  runat="server">
         <ItemTemplate>
             <div class="comment_panel">
-                <image class="headIcon" src="../Images/icon.jpg"></image>
+                <image class="headIcon" src="../Images/Icon/<%#Eval("uid") %>.jpg"></image>
                 <span style="position:center"> <%# Eval("user") %> <a><%# Eval("time") %></a> 
                     <%# Eval("text") %>
                 </span>
+                <asp:Button  UseSubmitBehavior="false" CommandArgument='<%#Eval("Id") %>'  OnClick="btn_delete_comment_Click" runat="server" Text="删除评论" />
             </div>
         </ItemTemplate>
     </asp:Repeater>
@@ -45,6 +45,7 @@
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="add_comment_btn" EventName="Click" />
         </Triggers>
+
     </asp:UpdatePanel>
 </asp:Content>
 

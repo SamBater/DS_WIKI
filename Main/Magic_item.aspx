@@ -7,6 +7,7 @@
     <asp:FormView runat="server" ID="form" Width="100%">
         <ItemTemplate>
             <h2> <%#Eval("name") %> </h2>
+            
             <hr />
           <div class="transparent">
         <img src='<%# ResolveUrl("~/Images/Magic/"+Eval("Id") + ".jpg") %>  ' runat="server" />

@@ -54,14 +54,26 @@ public class DB
         db.SubmitChanges();
     }
 
-    public void UpdateTable()
-    {
 
+    public void DeleteComments(int id)
+    {
+        var result = from r in db.Comment where r.Id == id select r;
+        db.Comment.DeleteAllOnSubmit(result);
+        db.SubmitChanges();
     }
 
     public Object GetAllComment()
     {
-        var result =from r in db.Comment orderby r.time descending select r;
+        var result = from c in db.Comment
+                     orderby c.time descending
+                     select new
+                     {
+                         c.Id,
+                         c.text,
+                         c.time,
+                         user = c.Table.name,
+                         c.uid
+                     };
         return result;
     }
 

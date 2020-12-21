@@ -44,10 +44,9 @@ public partial class _Default : System.Web.UI.Page
     {
         if (db.CheckLogin(login_user.Text,login_passwd.Text))
         {
-            //Session["User"] = login_user.Text;
             Table t  = db.GetUser(login_user.Text);
             Session["User"] = t;
-            if (t.Id < 20) Session["Admin"] = true;
+            if (t.Id == 1) Session["Admin"] = true;
             Response.Redirect("./Home.aspx");
         }
         else

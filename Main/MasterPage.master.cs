@@ -4,14 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 public partial class MasterPage : System.Web.UI.MasterPage
 {
     Table user;
+    public string backgroundImages;
     protected void Page_Load(object sender, EventArgs e)
     {
         user = Session["User"] as Table;
         HandleLogin();
+
     }
 
     public void Test()
@@ -54,5 +57,11 @@ public partial class MasterPage : System.Web.UI.MasterPage
         {
             //Response.Redirect("./Login.aspx");
         }
+    }
+
+
+    protected void bgTimer_Tick(object sender, EventArgs e)
+    {
+        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "bind", "test()", true);
     }
 }

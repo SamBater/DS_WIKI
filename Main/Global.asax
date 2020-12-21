@@ -7,6 +7,8 @@
         ScriptResourceDefinition scriptRef = new ScriptResourceDefinition();
         scriptRef.Path = "~/Scripts/jquery-3.5.1.js";
         ScriptManager.ScriptResourceMapping.AddDefinition("jquery", scriptRef);
+
+
     }
 
     void Application_End(object sender, EventArgs e)

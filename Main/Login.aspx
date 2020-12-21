@@ -10,9 +10,10 @@
 </head>
 <body>
     <div class="bg" >
-        <div class="container" >
-            <div class="center" style="text-align:center">
-                <form id="form1" runat="server"   >
+        <div class="container"  >
+            <img style="margin-left:auto;margin-right:auto;display:block;top:10%;" width="800" height="150" src="Images/logo.png" />
+            <div class="center" style="text-align:center; margin:20px">
+                <form id="form1" runat="server" style="border:3px black;background:rgba(255,255,255,0.0);padding:50px"   >
 
          <asp:Panel ID="log_in_pannel" runat="server">
             <h2 style="color:red ">LOGIN</h2>
@@ -25,7 +26,7 @@
             <asp:TextBox ID="login_passwd" runat="server" placeholder="密码" type ="password"></asp:TextBox>
  
             <p>
-                            <asp:Label id="login_alert" runat="server"></asp:Label>
+                            <asp:Label id="login_alert" style="color:white;" runat="server"></asp:Label>
             </p>
             
             <asp:Button ID="redirect_register_btn" text="注册" OnClick="register_btn_Click1" runat="server" CssClass="button" />
