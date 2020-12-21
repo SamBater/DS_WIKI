@@ -55,7 +55,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         }
         else
         {
-            //Response.Redirect("./Login.aspx");
+            Response.Redirect("./Login.aspx");
         }
     }
 

@@ -27,25 +27,31 @@
  <asp:TextBox runat="server" TextMode="MultiLine" Cssclass="comment_panel" id="comment_input" style="width:60%;height:100px;margin:10px;text-align:left" placeholder="在此处添加评论"/>
             <br />
             <asp:button runat="server" ID="add_comment_btn" OnClick="add_comment_btn_Click"  style="text-align:end;margin-left:10px;" Text="发布评论"></asp:button>
-    <asp:UpdatePanel ID="update_panel"  runat="server">
+
+
+
+                <asp:UpdatePanel ID="update_panel" UpdateMode="Conditional"  runat="server">
         <ContentTemplate>
-    <asp:Repeater ID="comment_repeater"  runat="server">
+                    <asp:Repeater ID="comment_repeater" OnItemDataBound="comment_repeater_ItemDataBound"  runat="server">
         <ItemTemplate>
-            <div class="comment_panel">
+                        <div class="comment_panel">
                 <image class="headIcon" src="../Images/Icon/<%#Eval("uid") %>.jpg"></image>
                 <span style="position:center"> <%# Eval("user") %> <a><%# Eval("time") %></a> 
                     <%# Eval("text") %>
                 </span>
-                <asp:Button  UseSubmitBehavior="false" CommandArgument='<%#Eval("Id") %>'  OnClick="btn_delete_comment_Click" runat="server" Text="删除评论" />
+                <asp:Button ID="delete" Visible="false" runat="server" UseSubmitBehavior="false" CommandArgument='<%#Eval("Id") %>' Text="刪除評論" OnClick="btn_delete_comment_Click" />
             </div>
-        </ItemTemplate>
+                    </ItemTemplate>
+        
     </asp:Repeater>
-            <asp:Button ID="refresh"  runat="server"/>
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="add_comment_btn" EventName="Click" />
         </Triggers>
 
     </asp:UpdatePanel>
+
+            
+
 </asp:Content>
 

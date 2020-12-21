@@ -12,7 +12,8 @@ public partial class _Default : System.Web.UI.Page
     {
         comment_repeater.DataSource = db.GetAllComment();
         comment_repeater.DataBind();
-
+        this.DataBind();
+        update_panel.Update();
     }
 
 
@@ -36,6 +37,20 @@ public partial class _Default : System.Web.UI.Page
     {
         int id = Convert.ToInt32(((Button)sender).CommandArgument.ToString());
         db.DeleteComments(id);
+
+        comment_input.Text = string.Empty;
+        comment_repeater.DataSource = db.GetAllComment();
+        comment_repeater.DataBind();
+        update_panel.Update();
     }
 
+
+    protected void comment_repeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        Button b = (Button)e.Item.FindControl("delete");
+        if(b!= null && Session["Admin"] != null)
+        {
+            b.Visible = true;
+        }
+    }
 }
